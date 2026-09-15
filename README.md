@@ -15,7 +15,9 @@ A hands-on hardware engineering learning and portfolio repository documenting my
 
 ```text
 hardware-engineering/
+
 └── digital-design/
+
     ├── full_adder/
     │   ├── full_adder.v
     │   └── tb_full_adder.v
@@ -24,9 +26,13 @@ hardware-engineering/
     │   ├── ripple_adder_4bit.v
     │   └── tb_ripple_carry_adder_4bit.v
     │
-    └── d_flip_flop/
-        ├── d_flip_flop.v
-        └── tb_d_flip_flop.v
+    ├── d_flip_flop/
+    │   ├── d_flip_flop.v
+    │   └── tb_d_flip_flop.v
+    │
+    └── register_4bit/
+        ├── register_4bit.v
+        └── tb_register_4bit.v
 ```
 
 ## Projects
@@ -78,6 +84,26 @@ The self-checking testbench verifies that the output captures the input on risin
 
 **Verification result:** 3 tests passed, 0 failures.
 
+### 4-bit Register
+
+A 4-bit register implemented using four bits of sequential state.
+
+The register demonstrates:
+
+* Multi-bit sequential storage
+* Positive-edge-triggered state updates
+* Enable/load control
+* Synchronous reset
+* Reset priority over enable
+* State retention
+* Self-checking verification
+
+When `enable` is asserted, the register captures the input data on the rising clock edge. When `enable` is deasserted, the register retains its previous value.
+
+The register also includes a synchronous reset. When `reset` is asserted, the output is cleared to `0000` on the next rising clock edge.
+
+**Verification result:** 2 tests passed, 0 failures.
+
 ## Verification Approach
 
 Verification is treated as part of the design process rather than an afterthought.
@@ -118,4 +144,4 @@ This repository will grow alongside the hardware engineering lock-in, progressin
 
 **Learn the fundamentals, build the hardware, verify the behavior, and understand why it works.**
 
-This repository is a record of that process — from individual logic elements toward complete, verified digital systems.
+This repository is a record of that process; from individual logic elements toward complete, verified digital systems.
