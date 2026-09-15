@@ -5,12 +5,14 @@ integer fail_count;
 
 reg [3:0] D;
 reg clk;
+reg enable;
 wire [3:0] Q;
 
 register_4bit dut (
     .D(D),
     .clk(clk),
-    .Q(Q)
+    .Q(Q),
+    .enable(enable)
 );
 
 always #5 clk = ~clk;
@@ -20,6 +22,7 @@ initial begin
 
     clk = 0;
     D = 4'b0000;
+    enable = 1;
 
     pass_count = 0;
     fail_count = 0;
@@ -37,15 +40,16 @@ initial begin
     end
 
     #10;
+    enable = 0;
     D = 4'b0110;
 
     #10;
-    if (Q == 4'b0110) begin
+    if (Q == 4'b1011) begin
         pass_count = pass_count + 1;
         $display("PASS: Q = %b", Q);
     end else begin
         fail_count = fail_count + 1;
-        $display("FAIL: Expected 0110, Got %b", Q);
+        $display("FAIL: Expected 1011, Got %b", Q);
     end
 
     $display("PASS=%0d FAIL=%0d", pass_count, fail_count);
