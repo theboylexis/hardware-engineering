@@ -30,9 +30,13 @@ hardware-engineering/
     │   ├── d_flip_flop.v
     │   └── tb_d_flip_flop.v
     │
-    └── register_4bit/
-        ├── register_4bit.v
-        └── tb_register_4bit.v
+    ├── register_4bit/
+    │   ├── register_4bit.v
+    │   └── tb_register_4bit.v
+    │
+    └── counter_4bit/
+        ├── counter_4bit.v
+        └── tb_counter_4bit.v
 ```
 
 ## Projects
@@ -104,6 +108,32 @@ The register also includes a synchronous reset. When `reset` is asserted, the ou
 
 **Verification result:** 2 tests passed, 0 failures.
 
+### 4-bit Counter
+
+A 4-bit synchronous up-counter implemented using sequential Verilog RTL.
+
+The counter demonstrates:
+
+* Clock-driven state updates
+* Synchronous reset
+* Incrementing sequential state
+* Fixed-width binary arithmetic
+* Overflow and wraparound behavior
+* Self-checking testbench development
+
+When `reset` is asserted, the counter is cleared to `0000` on the next rising clock edge. When reset is inactive, the counter increments by one on every rising edge.
+
+Because the counter is 4 bits wide, it wraps from `1111` back to `0000` after the next increment.
+
+The testbench verifies:
+
+* Reset behavior
+* First increment
+* Second increment
+* 4-bit wraparound
+
+**Verification result:** 4 tests passed, 0 failures.
+
 ## Verification Approach
 
 Verification is treated as part of the design process rather than an afterthought.
@@ -129,16 +159,18 @@ The goal is to verify not only that a design produces the expected output, but a
 
 This repository will grow alongside the hardware engineering lock-in, progressing from fundamental RTL building blocks toward larger FPGA-based systems.
 
-1. Sequential logic
-2. Registers and counters
-3. Finite-state machines
-4. RTL design patterns
-5. Verification and testbench development
-6. Digital datapaths and control
-7. FPGA architecture and implementation
-8. Timing and constraints
-9. Hardware debugging
-10. Larger FPGA-based digital systems
+1. Sequential logic fundamentals
+2. Registers, enables, resets, and counters
+3. Shift registers
+4. Finite-state machines
+5. Timing fundamentals
+6. RTL design patterns
+7. Verification and testbench development
+8. Digital datapaths and control
+9. FPGA architecture and implementation
+10. Timing and constraints
+11. Hardware debugging
+12. Larger FPGA-based digital systems
 
 ## Philosophy
 
