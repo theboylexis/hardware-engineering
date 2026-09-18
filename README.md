@@ -34,9 +34,13 @@ hardware-engineering/
     │   ├── register_4bit.v
     │   └── tb_register_4bit.v
     │
-    └── counter_4bit/
-        ├── counter_4bit.v
-        └── tb_counter_4bit.v
+    ├── counter_4bit/
+    │   ├── counter_4bit.v
+    │   └── tb_counter_4bit.v
+    │
+    └── shift_register_4bit/
+        ├── shift_register_4bit.v
+        └── tb_shift_register_4bit.v
 ```
 
 ## Projects
@@ -134,6 +138,50 @@ The testbench verifies:
 
 **Verification result:** 4 tests passed, 0 failures.
 
+### 4-bit Shift Register
+
+A 4-bit right-shifting register implemented using sequential Verilog RTL.
+
+The shift register demonstrates:
+
+* Serial data input
+* Multi-bit sequential storage
+* Positive-edge-triggered updates
+* Synchronous reset
+* Bit shifting between register positions
+* Serial data entering one bit at a time
+* Self-checking testbench development
+
+On each rising clock edge, the incoming `serial_in` bit is loaded into the most significant bit while the existing bits shift one position to the right.
+
+For a 4-bit register:
+
+```text
+serial_in → Q3 → Q2 → Q1 → Q0
+```
+
+The design uses the RTL expression:
+
+```verilog
+Q <= {serial_in, Q[3:1]};
+```
+
+With a sequence of `1` inputs, the register fills from the left:
+
+```text
+0000 → 1000 → 1100 → 1110 → 1111
+```
+
+When `0` inputs are applied, the stored `1`s shift toward the output:
+
+```text
+1111 → 0111 → 0011
+```
+
+The testbench verifies reset behavior and multiple shift operations using automated PASS/FAIL checks.
+
+**Verification result:** 5 tests passed, 0 failures.
+
 ## Verification Approach
 
 Verification is treated as part of the design process rather than an afterthought.
@@ -176,4 +224,4 @@ This repository will grow alongside the hardware engineering lock-in, progressin
 
 **Learn the fundamentals, build the hardware, verify the behavior, and understand why it works.**
 
-This repository is a record of that process; from individual logic elements toward complete, verified digital systems.
+This repository is a record of that process, from individual logic elements toward complete, verified digital systems.
