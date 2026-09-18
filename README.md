@@ -38,9 +38,13 @@ hardware-engineering/
     │   ├── counter_4bit.v
     │   └── tb_counter_4bit.v
     │
-    └── shift_register_4bit/
-        ├── shift_register_4bit.v
-        └── tb_shift_register_4bit.v
+    ├── shift_register_4bit/
+    │   ├── shift_register_4bit.v
+    │   └── tb_shift_register_4bit.v
+    │
+    └── fsm_2state/
+        ├── fsm_2state.v
+        └── tb_fsm_2state.v
 ```
 
 ## Projects
@@ -181,6 +185,54 @@ When `0` inputs are applied, the stored `1`s shift toward the output:
 The testbench verifies reset behavior and multiple shift operations using automated PASS/FAIL checks.
 
 **Verification result:** 5 tests passed, 0 failures.
+
+### 2-state Finite-State Machine
+
+A 2-state finite-state machine implemented using sequential and combinational Verilog RTL.
+
+The FSM contains two states:
+
+* `IDLE`
+* `ACTIVE`
+
+The state machine demonstrates:
+
+* Finite-state machine architecture
+* State storage using sequential logic
+* Combinational next-state logic
+* State transitions based on inputs
+* Positive-edge-triggered state updates
+* Synchronous reset
+* Combinational output logic
+* Self-checking testbench development
+
+The transition behavior is:
+
+```text
+IDLE + start=0  → IDLE
+IDLE + start=1  → ACTIVE
+
+ACTIVE + done=0 → ACTIVE
+ACTIVE + done=1 → IDLE
+```
+
+The `active` output indicates whether the FSM is currently in the `ACTIVE` state.
+
+The design separates the FSM into three logical components:
+
+```text
+Next-state logic  → combinational
+State register    → sequential
+Output logic      → combinational
+```
+
+The testbench verifies:
+
+* Reset to `IDLE`
+* Transition from `IDLE` to `ACTIVE`
+* Transition from `ACTIVE` back to `IDLE`
+
+**Verification result:** 3 tests passed, 0 failures.
 
 ## Verification Approach
 
